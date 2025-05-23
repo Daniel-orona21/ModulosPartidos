@@ -217,7 +217,7 @@
             <div class="chart-header">
               <h3 class="chart-title">Evolución de Goles por Mes</h3>
               <div class="chart-value">
-                <span class="current-value">{{ (goalsPerMonthData.datasets[0]?.data && goalsPerMonthData.datasets[0].data.length > 0) ? goalsPerMonthData.datasets[0].data[goalsPerMonthData.datasets[0].data.length - 1] : 0 }}</span>
+                <span class="current-value">{{ (goalsPerMonthData.datasets[0].data && goalsPerMonthData.datasets[0].data.length > 0) ? goalsPerMonthData.datasets[0].data[goalsPerMonthData.datasets[0].data.length - 1] : 0 }}</span>
                 <span class="value-label">goles este mes</span>
               </div>
             </div>
@@ -234,14 +234,14 @@
                 
 
                 <path
-                  [attr.d]="getLineChartArea(goalsPerMonthData.datasets[0]?.data || [])"
+                  [attr.d]="getLineChartArea(goalsPerMonthData.datasets[0].data || [])"
                   fill="url(#gradient)"
                   opacity="0.3">
                 </path>
                 
 
                 <path
-                  [attr.d]="getLineChartPath(goalsPerMonthData.datasets[0]?.data || [])"
+                  [attr.d]="getLineChartPath(goalsPerMonthData.datasets[0].data || [])"
                   fill="none"
                   stroke="#ffffff"
                   stroke-width="3"
@@ -250,7 +250,7 @@
                 </path>
                 
 
-                <g *ngFor="let point of getLineChartPoints(goalsPerMonthData.datasets[0]?.data || [])">
+                <g *ngFor="let point of getLineChartPoints(goalsPerMonthData.datasets[0].data || [])">
                   <circle
                     [attr.cx]="point.x"
                     [attr.cy]="point.y"
