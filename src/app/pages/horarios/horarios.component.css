@@ -172,8 +172,7 @@
 }
 
 .mobile-day-btn.active {
-  background-color: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Mobile Matches (hidden by default on desktop) */
@@ -617,6 +616,7 @@
   .schedule-container {
     display: none;
   }
+
   
   /* Mostrar vista móvil */
   .mobile-day-selector {
@@ -663,6 +663,7 @@
 @media (max-width: 576px) {
   .horarios-container {
     padding: 10px;
+    padding-bottom: 80px !important;
   }
   
   .filters {
