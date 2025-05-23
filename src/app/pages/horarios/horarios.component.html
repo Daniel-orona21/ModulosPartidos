@@ -1,503 +1,535 @@
 <div class="horarios-container">
-  <!-- Header section -->
-  <div class="header">
-    <div class="title-section">
-      <div class="contentT">
-      <h1>Horarios de Partidos</h1>
-      </div>
-      <button class="hamburger-btn">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
-    
-    <!-- Botón hamburguesa para móviles -->
-   
-    
-    <!-- Filtros (visibles en desktop, ocultos en móvil) -->
-    <div class="filters desktop-only">
-      <button class="filter-btn active">Todos</button>
-      <button class="filter-btn">Hoy</button>
-      <button class="filter-btn">Semana</button>
-      <button class="filter-btn">Próximos</button>
-    </div>
-  </div>
-  
-  <!-- Menú desplegable para móviles -->
-  <div class="mobile-menu">
-    <div class="mobile-menu-content">
-      <button class="mobile-filter-btn active">Todos</button>
-      <button class="mobile-filter-btn">Hoy</button>
-      <button class="mobile-filter-btn">Semana</button>
-      <button class="mobile-filter-btn">Próximos</button>
-      <button class="mobile-menu-close">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Calendar navigation -->
-  <div class="calendar-nav">
-    <button class="nav-btn">
-      <span class="material-symbols-outlined">chevron_left</span>
-    </button>
-    <div class="current-period">Mayo 2023</div>
-    <button class="nav-btn">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </button>
-  </div>
-
-  <!-- Selector de días para móviles -->
-  <div class="mobile-day-selector">
-    <button class="mobile-day-btn active">
-      <div class="day-name">Lun</div>
-      <div class="day-number">15</div>
-    </button>
-    <button class="mobile-day-btn">
-      <div class="day-name">Mar</div>
-      <div class="day-number">16</div>
-    </button>
-    <button class="mobile-day-btn">
-      <div class="day-name">Mié</div>
-      <div class="day-number">17</div>
-    </button>
-    <button class="mobile-day-btn">
-      <div class="day-name">Jue</div>
-      <div class="day-number">18</div>
-    </button>
-    <button class="mobile-day-btn">
-      <div class="day-name">Vie</div>
-      <div class="day-number">19</div>
-    </button>
-  </div>
-
-  <!-- Partidos para móviles -->
-  <div class="mobile-matches">
-    <div class="mobile-day-matches active" data-day="15">
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">La Liga</div>
-          <div class="match-time">20:45</div>
+  <!-- Versión para wearables (250x250) -->
+  <div class="wearable-view">
+    <div class="wearable-content">
+      <div class="wearable-title">HOY</div>
+      <div class="wearable-match-card">
+        <div class="wearable-match-header">
+          <div class="wearable-match-league">La Liga</div>
+          <div class="wearable-match-time">20:45</div>
         </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src='madrid.png' alt="Real Madrid">
+        <div class="wearable-match-teams">
+          <div class="wearable-team">
+            <img src="madrid.png" alt="Real Madrid">
             <span>R. Madrid</span>
           </div>
-          <div class="match-score live">
+          <div class="wearable-match-score live">
             <span>2</span>
             <span>-</span>
             <span>1</span>
           </div>
-          <div class="team">
+          <div class="wearable-team">
             <img src="barca.png" alt="Barcelona">
             <span>Barcelona</span>
           </div>
         </div>
-        <div class="match-venue">Santiago Bernabéu</div>
-      </div>
-
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">Premier League</div>
-          <div class="match-time">18:30</div>
-        </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="chelsea.png" alt="Chelsea">
-            <span>Chelsea</span>
-          </div>
-          <div class="match-score">
-            <span>1</span>
-            <span>-</span>
-            <span>1</span>
-          </div>
-          <div class="team">
-            <img src="arsenal.png" alt="Arsenal">
-            <span>Arsenal</span>
-          </div>
-        </div>
-        <div class="match-venue">Stamford Bridge</div>
+        <div class="wearable-match-venue">Santiago Bernabéu</div>
       </div>
     </div>
+  </div>
 
-    <div class="mobile-day-matches" data-day="16">
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">Bundesliga</div>
-          <div class="match-time">20:30</div>
+  <!-- Vista normal para otras resoluciones -->
+  <div class="normal-view">
+    <!-- Header section -->
+    <div class="header">
+      <div class="title-section">
+        <div class="contentT">
+        <h1>Horarios de Partidos</h1>
         </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="bayern.png" alt="Bayern">
-            <span>Bayern</span>
-          </div>
-          <div class="match-score upcoming">
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-          </div>
-          <div class="team">
-            <img src="dortmund.png" alt="Dortmund">
-            <span>Dortmund</span>
-          </div>
-        </div>
-        <div class="match-venue">Allianz Arena</div>
-      </div>
-    </div>
-
-    <div class="mobile-day-matches" data-day="17">
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">Serie A</div>
-          <div class="match-time">20:45</div>
-        </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="juventus.png" alt="Juventus">
-            <span>Juventus</span>
-          </div>
-          <div class="match-score upcoming">
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-          </div>
-          <div class="team">
-            <img src="milan.png" alt="Milan">
-            <span>Milan</span>
-          </div>
-        </div>
-        <div class="match-venue">Allianz Stadium</div>
+        <button class="hamburger-btn">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
       </div>
       
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">Ligue 1</div>
-          <div class="match-time">21:00</div>
-        </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="paris.png" alt="PSG">
-            <span>PSG</span>
-          </div>
-          <div class="match-score upcoming">
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-          </div>
-          <div class="team">
-            <img src="lyon.png" alt="Lyon">
-            <span>Lyon</span>
-          </div>
-        </div>
-        <div class="match-venue">Parc des Princes</div>
+      <!-- Botón hamburguesa para móviles -->
+     
+      
+      <!-- Filtros (visibles en desktop, ocultos en móvil) -->
+      <div class="filters desktop-only">
+        <button class="filter-btn active">Todos</button>
+        <button class="filter-btn">Hoy</button>
+        <button class="filter-btn">Semana</button>
+        <button class="filter-btn">Próximos</button>
+      </div>
+    </div>
+    
+    <!-- Menú desplegable para móviles -->
+    <div class="mobile-menu">
+      <div class="mobile-menu-content">
+        <button class="mobile-filter-btn active">Todos</button>
+        <button class="mobile-filter-btn">Hoy</button>
+        <button class="mobile-filter-btn">Semana</button>
+        <button class="mobile-filter-btn">Próximos</button>
+        <button class="mobile-menu-close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
     </div>
 
-    <div class="mobile-day-matches" data-day="18">
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">Champions League</div>
-          <div class="match-time">21:00</div>
-        </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="manchester.png" alt="Man City">
-            <span>Man City</span>
-          </div>
-          <div class="match-score upcoming">
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-          </div>
-          <div class="team">
-            <img src="liverpool.png" alt="Liverpool">
-            <span>Liverpool</span>
-          </div>
-        </div>
-        <div class="match-venue">Etihad Stadium</div>
-      </div>
+    <!-- Calendar navigation -->
+    <div class="calendar-nav">
+      <button class="nav-btn">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <div class="current-period">Mayo 2023</div>
+      <button class="nav-btn">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
     </div>
 
-    <div class="mobile-day-matches" data-day="19">
-      <div class="match-card">
-        <div class="match-header">
-          <div class="match-league">La Liga</div>
-          <div class="match-time">21:00</div>
-        </div>
-        <div class="match-teams">
-          <div class="team">
-            <img src="atletico.png" alt="Atlético">
-            <span>Atlético</span>
-          </div>
-          <div class="match-score upcoming">
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-          </div>
-          <div class="team">
-            <img src="sevilla.png" alt="Sevilla">
-            <span>Sevilla</span>
-          </div>
-        </div>
-        <div class="match-venue">Wanda Metropolitano</div>
-      </div>
+    <!-- Selector de días para móviles -->
+    <div class="mobile-day-selector">
+      <button class="mobile-day-btn active">
+        <div class="day-name">Lun</div>
+        <div class="day-number">15</div>
+      </button>
+      <button class="mobile-day-btn">
+        <div class="day-name">Mar</div>
+        <div class="day-number">16</div>
+      </button>
+      <button class="mobile-day-btn">
+        <div class="day-name">Mié</div>
+        <div class="day-number">17</div>
+      </button>
+      <button class="mobile-day-btn">
+        <div class="day-name">Jue</div>
+        <div class="day-number">18</div>
+      </button>
+      <button class="mobile-day-btn">
+        <div class="day-name">Vie</div>
+        <div class="day-number">19</div>
+      </button>
     </div>
-  </div>
 
-  <!-- Grid de horarios para desktop -->
-  <div class="schedule-container">
-    <div class="schedule-grid">
-      <!-- Columna para cada día -->
-      <div class="day-column today">
-        <div class="day-header">
-          <div class="day-name">Lun</div>
-          <div class="day-number">15</div>
-        </div>
-        <div class="matches">
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="laliga.png" alt="La Liga">
-            </div>
+    <!-- Partidos para móviles -->
+    <div class="mobile-matches">
+      <div class="mobile-day-matches active" data-day="15">
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">La Liga</div>
             <div class="match-time">20:45</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src='madrid.png' alt="Real Madrid">
-                <span>R. Madrid</span>
-              </div>
-              <div class="match-score live">
-                <span>2</span>
-                <span>-</span>
-                <span>1</span>
-              </div>
-              <div class="team">
-                <img src='barca.png' alt="Barcelona">
-                <span>Barcelona</span>
-              </div>
-            </div>
-            <div class="match-venue">Santiago Bernabéu</div>
           </div>
-
-          <div class="match-card">
-            <div class="league-badge">
-              <img src='premier.png' alt="Premier League">
+          <div class="match-teams">
+            <div class="team">
+              <img src='madrid.png' alt="Real Madrid">
+              <span>R. Madrid</span>
             </div>
+            <div class="match-score live">
+              <span>2</span>
+              <span>-</span>
+              <span>1</span>
+            </div>
+            <div class="team">
+              <img src="barca.png" alt="Barcelona">
+              <span>Barcelona</span>
+            </div>
+          </div>
+          <div class="match-venue">Santiago Bernabéu</div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">Premier League</div>
             <div class="match-time">18:30</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src="chelsea.png" alt="Chelsea">
-                <span>Chelsea</span>
-              </div>
-              <div class="match-score">
-                <span>1</span>
-                <span>-</span>
-                <span>1</span>
-              </div>
-              <div class="team">
-                <img src="arsenal.png" alt="Arsenal">
-                <span>Arsenal</span>
-              </div>
-            </div>
-            <div class="match-venue">Stamford Bridge</div>
           </div>
+          <div class="match-teams">
+            <div class="team">
+              <img src="chelsea.png" alt="Chelsea">
+              <span>Chelsea</span>
+            </div>
+            <div class="match-score">
+              <span>1</span>
+              <span>-</span>
+              <span>1</span>
+            </div>
+            <div class="team">
+              <img src="arsenal.png" alt="Arsenal">
+              <span>Arsenal</span>
+            </div>
+          </div>
+          <div class="match-venue">Stamford Bridge</div>
         </div>
       </div>
 
-      <div class="day-column">
-        <div class="day-header">
-          <div class="day-name">Mar</div>
-          <div class="day-number">16</div>
-        </div>
-        <div class="matches">
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="bundesliga.png" alt="Bundesliga">
-            </div>
+      <div class="mobile-day-matches" data-day="16">
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">Bundesliga</div>
             <div class="match-time">20:30</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src="bayern.png" alt="Bayern">
-                <span>Bayern</span>
-              </div>
-              <div class="match-score upcoming">
-                <span>-</span>
-                <span>-</span>
-                <span>-</span>
-              </div>
-              <div class="team">
-                <img src='dortmund.png' alt="Dortmund">
-                <span>Dortmund</span>
-              </div>
-            </div>
-            <div class="match-venue">Allianz Arena</div>
           </div>
+          <div class="match-teams">
+            <div class="team">
+              <img src="bayern.png" alt="Bayern">
+              <span>Bayern</span>
+            </div>
+            <div class="match-score upcoming">
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+            </div>
+            <div class="team">
+              <img src="dortmund.png" alt="Dortmund">
+              <span>Dortmund</span>
+            </div>
+          </div>
+          <div class="match-venue">Allianz Arena</div>
         </div>
       </div>
 
-      <div class="day-column">
-        <div class="day-header">
-          <div class="day-name">Mié</div>
-          <div class="day-number">17</div>
-        </div>
-        <div class="matches">
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="seriea.png" alt="Serie A">
-            </div>
+      <div class="mobile-day-matches" data-day="17">
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">Serie A</div>
             <div class="match-time">20:45</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src='juventus.png' alt="Juventus">
-                <span>Juventus</span>
-              </div>
-              <div class="match-score upcoming">
-                <span>-</span>
-                <span>-</span>
-                <span>-</span>
-              </div>
-              <div class="team">
-                <img src='milan.png' alt="Milan">
-                <span>Milan</span>
-              </div>
-            </div>
-            <div class="match-venue">Allianz Stadium</div>
           </div>
-          
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="ligue1.png" alt="Ligue 1">
+          <div class="match-teams">
+            <div class="team">
+              <img src="juventus.png" alt="Juventus">
+              <span>Juventus</span>
             </div>
+            <div class="match-score upcoming">
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+            </div>
+            <div class="team">
+              <img src="milan.png" alt="Milan">
+              <span>Milan</span>
+            </div>
+          </div>
+          <div class="match-venue">Allianz Stadium</div>
+        </div>
+        
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">Ligue 1</div>
             <div class="match-time">21:00</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src='paris.png' alt="PSG">
-                <span>PSG</span>
-              </div>
-              <div class="match-score upcoming">
-                <span>-</span>
-                <span>-</span>
-                <span>-</span>
-              </div>
-              <div class="team">
-                <img src="lyon.png" alt="Lyon">
-                <span>Lyon</span>
-              </div>
-            </div>
-            <div class="match-venue">Parc des Princes</div>
           </div>
+          <div class="match-teams">
+            <div class="team">
+              <img src="paris.png" alt="PSG">
+              <span>PSG</span>
+            </div>
+            <div class="match-score upcoming">
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+            </div>
+            <div class="team">
+              <img src="lyon.png" alt="Lyon">
+              <span>Lyon</span>
+            </div>
+          </div>
+          <div class="match-venue">Parc des Princes</div>
         </div>
       </div>
 
-      <div class="day-column">
-        <div class="day-header">
-          <div class="day-name">Jue</div>
-          <div class="day-number">18</div>
-        </div>
-        <div class="matches">
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="champions.png" alt="Champions League">
-            </div>
+      <div class="mobile-day-matches" data-day="18">
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">Champions League</div>
             <div class="match-time">21:00</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src="manchester.png" alt="Man City">
-                <span>Man City</span>
-              </div>
-              <div class="match-score upcoming">
-                <span>-</span>
-                <span>-</span>
-                <span>-</span>
-              </div>
-              <div class="team">
-                <img src="liverpool.png" alt="Liverpool">
-                <span>Liverpool</span>
-              </div>
-            </div>
-            <div class="match-venue">Etihad Stadium</div>
           </div>
+          <div class="match-teams">
+            <div class="team">
+              <img src="manchester.png" alt="Man City">
+              <span>Man City</span>
+            </div>
+            <div class="match-score upcoming">
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+            </div>
+            <div class="team">
+              <img src="liverpool.png" alt="Liverpool">
+              <span>Liverpool</span>
+            </div>
+          </div>
+          <div class="match-venue">Etihad Stadium</div>
         </div>
       </div>
 
-      <div class="day-column">
-        <div class="day-header">
-          <div class="day-name">Vie</div>
-          <div class="day-number">19</div>
-        </div>
-        <div class="matches">
-          <div class="match-card">
-            <div class="league-badge">
-              <img src="laliga.png" alt="La Liga">
-            </div>
+      <div class="mobile-day-matches" data-day="19">
+        <div class="match-card">
+          <div class="match-header">
+            <div class="match-league">La Liga</div>
             <div class="match-time">21:00</div>
-            <div class="match-teams">
-              <div class="team">
-                <img src="atletico.png" alt="Atlético">
-                <span>Atlético</span>
-              </div>
-              <div class="match-score upcoming">
-                <span>-</span>
-                <span>-</span>
-                <span>-</span>
-              </div>
-              <div class="team">
-                <img src="sevilla.png" alt="Sevilla">
-                <span>Sevilla</span>
-              </div>
+          </div>
+          <div class="match-teams">
+            <div class="team">
+              <img src="atletico.png" alt="Atlético">
+              <span>Atlético</span>
             </div>
-            <div class="match-venue">Wanda Metropolitano</div>
+            <div class="match-score upcoming">
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+            </div>
+            <div class="team">
+              <img src="sevilla.png" alt="Sevilla">
+              <span>Sevilla</span>
+            </div>
+          </div>
+          <div class="match-venue">Wanda Metropolitano</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de horarios para desktop -->
+    <div class="schedule-container">
+      <div class="schedule-grid">
+        <!-- Columna para cada día -->
+        <div class="day-column today">
+          <div class="day-header">
+            <div class="day-name">Lun</div>
+            <div class="day-number">15</div>
+          </div>
+          <div class="matches">
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="laliga.png" alt="La Liga">
+              </div>
+              <div class="match-time">20:45</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src='madrid.png' alt="Real Madrid">
+                  <span>R. Madrid</span>
+                </div>
+                <div class="match-score live">
+                  <span>2</span>
+                  <span>-</span>
+                  <span>1</span>
+                </div>
+                <div class="team">
+                  <img src='barca.png' alt="Barcelona">
+                  <span>Barcelona</span>
+                </div>
+              </div>
+              <div class="match-venue">Santiago Bernabéu</div>
+            </div>
+
+            <div class="match-card">
+              <div class="league-badge">
+                <img src='premier.png' alt="Premier League">
+              </div>
+              <div class="match-time">18:30</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src="chelsea.png" alt="Chelsea">
+                  <span>Chelsea</span>
+                </div>
+                <div class="match-score">
+                  <span>1</span>
+                  <span>-</span>
+                  <span>1</span>
+                </div>
+                <div class="team">
+                  <img src="arsenal.png" alt="Arsenal">
+                  <span>Arsenal</span>
+                </div>
+              </div>
+              <div class="match-venue">Stamford Bridge</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-column">
+          <div class="day-header">
+            <div class="day-name">Mar</div>
+            <div class="day-number">16</div>
+          </div>
+          <div class="matches">
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="bundesliga.png" alt="Bundesliga">
+              </div>
+              <div class="match-time">20:30</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src="bayern.png" alt="Bayern">
+                  <span>Bayern</span>
+                </div>
+                <div class="match-score upcoming">
+                  <span>-</span>
+                  <span>-</span>
+                  <span>-</span>
+                </div>
+                <div class="team">
+                  <img src='dortmund.png' alt="Dortmund">
+                  <span>Dortmund</span>
+                </div>
+              </div>
+              <div class="match-venue">Allianz Arena</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-column">
+          <div class="day-header">
+            <div class="day-name">Mié</div>
+            <div class="day-number">17</div>
+          </div>
+          <div class="matches">
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="seriea.png" alt="Serie A">
+              </div>
+              <div class="match-time">20:45</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src='juventus.png' alt="Juventus">
+                  <span>Juventus</span>
+                </div>
+                <div class="match-score upcoming">
+                  <span>-</span>
+                  <span>-</span>
+                  <span>-</span>
+                </div>
+                <div class="team">
+                  <img src='milan.png' alt="Milan">
+                  <span>Milan</span>
+                </div>
+              </div>
+              <div class="match-venue">Allianz Stadium</div>
+            </div>
+            
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="ligue1.png" alt="Ligue 1">
+              </div>
+              <div class="match-time">21:00</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src='paris.png' alt="PSG">
+                  <span>PSG</span>
+                </div>
+                <div class="match-score upcoming">
+                  <span>-</span>
+                  <span>-</span>
+                  <span>-</span>
+                </div>
+                <div class="team">
+                  <img src="lyon.png" alt="Lyon">
+                  <span>Lyon</span>
+                </div>
+              </div>
+              <div class="match-venue">Parc des Princes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-column">
+          <div class="day-header">
+            <div class="day-name">Jue</div>
+            <div class="day-number">18</div>
+          </div>
+          <div class="matches">
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="champions.png" alt="Champions League">
+              </div>
+              <div class="match-time">21:00</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src="manchester.png" alt="Man City">
+                  <span>Man City</span>
+                </div>
+                <div class="match-score upcoming">
+                  <span>-</span>
+                  <span>-</span>
+                  <span>-</span>
+                </div>
+                <div class="team">
+                  <img src="liverpool.png" alt="Liverpool">
+                  <span>Liverpool</span>
+                </div>
+              </div>
+              <div class="match-venue">Etihad Stadium</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-column">
+          <div class="day-header">
+            <div class="day-name">Vie</div>
+            <div class="day-number">19</div>
+          </div>
+          <div class="matches">
+            <div class="match-card">
+              <div class="league-badge">
+                <img src="laliga.png" alt="La Liga">
+              </div>
+              <div class="match-time">21:00</div>
+              <div class="match-teams">
+                <div class="team">
+                  <img src="atletico.png" alt="Atlético">
+                  <span>Atlético</span>
+                </div>
+                <div class="match-score upcoming">
+                  <span>-</span>
+                  <span>-</span>
+                  <span>-</span>
+                </div>
+                <div class="team">
+                  <img src="sevilla.png" alt="Sevilla">
+                  <span>Sevilla</span>
+                </div>
+              </div>
+              <div class="match-venue">Wanda Metropolitano</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Partidos destacados -->
-  <div class="upcoming-highlights">
-    <h2>Partidos Destacados</h2>
-    <div class="highlights-grid">
-      <div class="highlight-card">
-        <div class="highlight-date">
-          <div class="date-day">24</div>
-          <div class="date-month">MAY</div>
-        </div>
-        <div class="highlight-content">
-          <div class="highlight-league">Europa League - Final</div>
-          <div class="highlight-teams">
-            <span>Roma</span>
-            <span>vs</span>
-            <span>Leverkusen</span>
+    <!-- Partidos destacados -->
+    <div class="upcoming-highlights">
+      <h2>Partidos Destacados</h2>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-date">
+            <div class="date-day">24</div>
+            <div class="date-month">MAY</div>
           </div>
-          <div class="highlight-time">20:00 GMT</div>
+          <div class="highlight-content">
+            <div class="highlight-league">Europa League - Final</div>
+            <div class="highlight-teams">
+              <span>Roma</span>
+              <span>vs</span>
+              <span>Leverkusen</span>
+            </div>
+            <div class="highlight-time">20:00 GMT</div>
+          </div>
         </div>
-      </div>
 
-      <div class="highlight-card">
-        <div class="highlight-date">
-          <div class="date-day">28</div>
-          <div class="date-month">MAY</div>
-        </div>
-        <div class="highlight-content">
-          <div class="highlight-league">La Liga - Jornada Final</div>
-          <div class="highlight-teams">
-            <span>Todos los equipos</span>
+        <div class="highlight-card">
+          <div class="highlight-date">
+            <div class="date-day">28</div>
+            <div class="date-month">MAY</div>
           </div>
-          <div class="highlight-time">18:00 GMT</div>
+          <div class="highlight-content">
+            <div class="highlight-league">La Liga - Jornada Final</div>
+            <div class="highlight-teams">
+              <span>Todos los equipos</span>
+            </div>
+            <div class="highlight-time">18:00 GMT</div>
+          </div>
         </div>
-      </div>
 
-      <div class="highlight-card featured">
-        <div class="highlight-date">
-          <div class="date-day">10</div>
-          <div class="date-month">JUN</div>
-        </div>
-        <div class="highlight-content">
-          <div class="highlight-league">Champions League - Final</div>
-          <div class="highlight-teams">
-            <span>Real Madrid</span>
-            <span>vs</span>
-            <span>Bayern Munich</span>
+        <div class="highlight-card featured">
+          <div class="highlight-date">
+            <div class="date-day">10</div>
+            <div class="date-month">JUN</div>
           </div>
-          <div class="highlight-time">20:45 GMT</div>
+          <div class="highlight-content">
+            <div class="highlight-league">Champions League - Final</div>
+            <div class="highlight-teams">
+              <span>Real Madrid</span>
+              <span>vs</span>
+              <span>Bayern Munich</span>
+            </div>
+            <div class="highlight-time">20:45 GMT</div>
+          </div>
         </div>
       </div>
     </div>
