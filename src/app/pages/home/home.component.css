@@ -265,14 +265,24 @@ li.active {
         color: #000000;
     }
 
-    /* Posicionamiento en esquinas - Info (superior izquierda) */
-    ul li:nth-child(3) {
+    /* Posicionamiento en esquinas - Horarios (superior izquierda) */
+    ul li:nth-child(1) {
         top: -20px;
         left: -20px;
     }
 
-    ul li:nth-child(3) .nav-item {
+    ul li:nth-child(1) .nav-item {
         transform: translate(5px, 5px);
+    }
+
+    /* Ocultar lugares */
+    ul li:nth-child(2) {
+        display: none;
+    }
+
+    /* Ocultar info */
+    ul li:nth-child(3) {
+        display: none;
     }
 
     /* Posicionamiento en esquinas - Resultados (superior derecha) */
@@ -283,26 +293,6 @@ li.active {
 
     ul li:nth-child(4) .nav-item {
         transform: translate(-5px, 5px);
-    }
-
-    /* Posicionamiento en esquinas - Lugares (inferior izquierda) */
-    ul li:nth-child(2) {
-        bottom: -20px;
-        left: -20px;
-    }
-
-    ul li:nth-child(2) .nav-item {
-        transform: translate(5px, -5px);
-    }
-
-    /* Posicionamiento en esquinas - Horarios (inferior derecha) */
-    ul li:nth-child(1) {
-        bottom: -20px;
-        right: -20px;
-    }
-
-    ul li:nth-child(1) .nav-item {
-        transform: translate(-5px, -5px);
     }
 
     /* Ocultar ajustes (último elemento) */
