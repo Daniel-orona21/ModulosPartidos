@@ -1,0 +1,189 @@
+<div class="tv-dashboard">
+  <!-- Header con información del sistema -->
+  <div class="tv-header">
+    <div class="tv-brand">
+      <span class="material-symbols-outlined brand-icon">sports_soccer</span>
+      <h1>Tarjeta <span style="color: red;">R</span>oja</h1>
+    </div>
+    <div class="tv-datetime">
+      <div class="tv-time">{{ formatTime() }}</div>
+      <div class="tv-date">{{ formatDate() }}</div>
+    </div>
+  </div>
+
+  <!-- Carrusel principal -->
+  <div class="tv-carousel" *ngIf="widgets.length > 0">
+    <div class="widget-container" [@slideInOut]>
+      <div class="widget">
+        
+        <!-- Widget de métricas -->
+        <div *ngIf="getCurrentWidget().type === 'metric'" class="metric-widget">
+          <div class="widget-header">
+            <span class="material-symbols-outlined widget-icon">
+              {{ getCurrentWidget().icon }}
+            </span>
+            <h2>{{ getCurrentWidget().title }}</h2>
+          </div>
+          <div class="metric-content">
+            <div class="metric-main">
+              <div class="metric-value">{{ getCurrentWidget().data.value }}</div>
+              <div class="metric-change" [class]="getCurrentWidget().data.change.startsWith('+') ? 'positive' : 'negative'">
+                <span class="material-symbols-outlined">
+                  {{ getCurrentWidget().data.change.startsWith('+') ? 'trending_up' : 'trending_down' }}
+                </span>
+                {{ getCurrentWidget().data.change }}
+              </div>
+            </div>
+            <div class="metric-subtitle">{{ getCurrentWidget().data.subtitle }}</div>
+            <div class="metric-chart">
+              <svg viewBox="0 0 400 80" class="chart-svg">
+                <polyline 
+                  [attr.points]="getChartPoints(getCurrentWidget().data.chartData)"
+                  fill="none"
+                  [attr.stroke]="getCurrentWidget().color"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                </polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget de partidos -->
+        <div *ngIf="getCurrentWidget().type === 'matches'" class="matches-widget">
+          <div class="widget-header">
+            <span class="material-symbols-outlined widget-icon">
+              {{ getCurrentWidget().icon }}
+            </span>
+            <h2>{{ getCurrentWidget().title }}</h2>
+          </div>
+          <div class="matches-content">
+            <div class="match-item" *ngFor="let match of getCurrentWidget().data">
+              <div class="match-teams">
+                <div class="team">{{ match.homeTeam }}</div>
+                <div class="vs">VS</div>
+                <div class="team">{{ match.awayTeam }}</div>
+              </div>
+              <div class="match-info">
+                <div class="match-date">{{ match.date }}</div>
+                <div class="match-league">{{ match.league }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget de goleadores -->
+        <div *ngIf="getCurrentWidget().type === 'scorers'" class="scorers-widget">
+          <div class="widget-header">
+            <span class="material-symbols-outlined widget-icon">
+              {{ getCurrentWidget().icon }}
+            </span>
+            <h2>{{ getCurrentWidget().title }}</h2>
+          </div>
+          <div class="scorers-content">
+            <div class="scorer-item" *ngFor="let scorer of getCurrentWidget().data; let i = index">
+              <div class="scorer-position">{{ i + 1 }}</div>
+              <div class="scorer-info">
+                <div class="scorer-name">{{ scorer.name }}</div>
+                <div class="scorer-team">{{ scorer.team }}</div>
+              </div>
+              <div class="scorer-goals">{{ scorer.goals }} goles</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget de horarios -->
+        <div *ngIf="getCurrentWidget().type === 'schedule'" class="schedule-widget">
+          <div class="widget-header">
+            <span class="material-symbols-outlined widget-icon">
+              {{ getCurrentWidget().icon }}
+            </span>
+            <h2>{{ getCurrentWidget().title }}</h2>
+          </div>
+          <div class="schedule-content">
+            <div class="schedule-item" *ngFor="let item of getCurrentWidget().data">
+              <div class="schedule-time" [class]="'status-' + item.status">{{ item.time }}</div>
+              <div class="schedule-info">
+                <div class="schedule-event">{{ item.event }}</div>
+                <div class="schedule-location">{{ item.location }}</div>
+              </div>
+              <div class="schedule-status" [class]="'status-' + item.status">
+                <span class="material-symbols-outlined">
+                  {{ item.status === 'active' ? 'play_circle' : item.status === 'upcoming' ? 'schedule' : 'check_circle' }}
+                </span>
+                {{ item.status === 'active' ? 'En curso' : item.status === 'upcoming' ? 'Próximo' : 'Finalizado' }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget de resultados de partidos -->
+        <div *ngIf="getCurrentWidget().type === 'results'" class="results-widget">
+          <div class="widget-header">
+            <span class="material-symbols-outlined widget-icon">
+              {{ getCurrentWidget().icon }}
+            </span>
+            <h2>{{ getCurrentWidget().title }}</h2>
+          </div>
+          <div class="results-content">
+            <div class="result-item" *ngFor="let result of getCurrentWidget().data">
+              <div class="result-teams">
+                <div class="team-home">
+                  <img [src]="result.homeShield" [alt]="result.homeTeam" class="team-shield">
+                  <div class="team-name">{{ result.homeTeam }}</div>
+                </div>
+                <div class="result-score">
+                  <span class="score">{{ result.homeScore }}</span>
+                  <span class="separator">-</span>
+                  <span class="score">{{ result.awayScore }}</span>
+                </div>
+                <div class="team-away">
+                  <div class="team-name">{{ result.awayTeam }}</div>
+                  <img [src]="result.awayShield" [alt]="result.awayTeam" class="team-shield">
+                </div>
+              </div>
+              <div class="result-info">
+                <div class="result-date">{{ result.date }}</div>
+                <div class="result-league">{{ result.league }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Indicadores del carrusel -->
+    <div class="carousel-indicators">
+      <div 
+        class="indicator" 
+        *ngFor="let widget of widgets; let i = index"
+        [class.active]="i === currentWidgetIndex"
+        (click)="currentWidgetIndex = i">
+      </div>
+    </div>
+
+    <!-- Controles del carrusel (opcional, para interacción manual) -->
+    <div class="carousel-controls">
+      <button class="control-btn prev" (click)="prevWidget()">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <button class="control-btn next" (click)="nextWidget()">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer con información adicional -->
+  <div class="tv-footer">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progressWidth"></div>
+    </div>
+    <div class="footer-info">
+      <span>Widget {{ currentWidgetIndex + 1 }} de {{ widgets.length }}</span>
+      <span>•</span>
+      <span>Actualización automática cada {{ SLIDE_DURATION / 1000 }}s</span>
+    </div>
+  </div>
+</div>

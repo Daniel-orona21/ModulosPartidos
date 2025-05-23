@@ -1,4 +1,8 @@
-<div class="contenedor">
+<!-- Modo TV Dashboard -->
+<app-tv-dashboard *ngIf="isTVMode"></app-tv-dashboard>
+
+<!-- Interfaz normal para dispositivos regulares -->
+<div class="contenedor" *ngIf="!isTVMode">
     <nav>
         <span class="material-symbols-outlined balon">
             sports_soccer

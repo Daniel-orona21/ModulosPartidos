@@ -36,10 +36,19 @@
 h1 {
   font-size: 4.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 0%, #a5a5a5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
+
+  > span {
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+  }
+
+  > span:not([style*="color"]) {
+    background: linear-gradient(135deg, #ffffff 0%, #a5a5a5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .subtitle {

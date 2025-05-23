@@ -367,3 +367,36 @@ li.active {
         background-color: rgba(255, 255, 255, 0.5);
     }
 }
+
+/* Estilos específicos para modo TV */
+@media screen and (min-width: 2400px) {
+    /* Cuando está en modo TV, ocultar la interfaz normal */
+    .contenedor {
+        display: none;
+    }
+    
+    /* Asegurar que el TV dashboard ocupe toda la pantalla */
+    app-tv-dashboard {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+    }
+}
+
+/* Modo TV específico para resoluciones de televisión */
+@media screen and (min-width: 3840px) {
+    :host {
+        overflow: hidden;
+    }
+    
+    .contenedor {
+        display: none !important;
+    }
+    
+    app-tv-dashboard {
+        font-size: 1.2em; /* Escalar un poco más el texto en pantallas 4K */
+    }
+}
