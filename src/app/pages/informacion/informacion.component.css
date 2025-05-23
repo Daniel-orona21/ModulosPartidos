@@ -553,7 +553,7 @@ nav {
 }
 
 .video-fondo, .video-wrapper, .shadow-overlay, .div1, .titulo-texto, .info-recorte, .div3, .div4 {
-  opacity: 1;
+  opacity: 0;
   transition: all 2s ease;
 }
 
