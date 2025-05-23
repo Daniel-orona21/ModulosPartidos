@@ -1,1 +1,355 @@
-<p>lugares works!</p>
+<div class="reservation-container">
+  <!-- Progress Indicator -->
+  <div class="progress-container">
+    <div class="progress-steps">
+      <div class="step" 
+           [class.active]="currentStep === ReservationStep.MATCH_SELECTION" 
+           [class.completed]="currentStep !== ReservationStep.MATCH_SELECTION"
+           (click)="goToStep(ReservationStep.MATCH_SELECTION)">
+        <div class="step-number">1</div>
+        <span class="step-label">Partido</span>
+      </div>
+      <div class="step-connector" [class.active]="currentStep !== ReservationStep.MATCH_SELECTION"></div>
+      <div class="step" 
+           [class.active]="currentStep === ReservationStep.SEAT_SELECTION" 
+           [class.completed]="currentStep === ReservationStep.SUMMARY || currentStep === ReservationStep.PAYMENT || currentStep === ReservationStep.CONFIRMATION"
+           [class.clickable]="selectedMatch"
+           (click)="goToStep(ReservationStep.SEAT_SELECTION)">
+        <div class="step-number">2</div>
+        <span class="step-label">Asientos</span>
+      </div>
+      <div class="step-connector" [class.active]="currentStep === ReservationStep.SUMMARY || currentStep === ReservationStep.PAYMENT || currentStep === ReservationStep.CONFIRMATION"></div>
+      <div class="step" 
+           [class.active]="currentStep === ReservationStep.SUMMARY || currentStep === ReservationStep.PAYMENT" 
+           [class.completed]="currentStep === ReservationStep.CONFIRMATION"
+           [class.clickable]="selectedSeats.length > 0"
+           (click)="goToStep(ReservationStep.SUMMARY)">
+        <div class="step-number">3</div>
+        <span class="step-label">Pago</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match Selection Step -->
+  <div class="step-content" *ngIf="currentStep === ReservationStep.MATCH_SELECTION">
+    <div class="step-header">
+      <h2 class="step-title">Selecciona tu partido</h2>
+      <p class="step-subtitle">Elige el encuentro al que deseas asistir</p>
+    </div>
+
+    <div class="loading-container" *ngIf="loading">
+      <div class="loading-spinner"></div>
+      <p>Cargando partidos...</p>
+    </div>
+
+    <div class="matches-grid" *ngIf="!loading">
+      <div class="match-card" 
+           *ngFor="let match of matches" 
+           (click)="onMatchSelect(match)"
+           [class.selected]="selectedMatch?.id === match.id">
+        
+        <div class="match-header">
+          <div class="match-date">
+            <span class="date-day">{{ formatDate(match.date).split(',')[0] }}</span>
+            <span class="date-full">{{ formatDate(match.date).split(',')[1] }}</span>
+          </div>
+          <div class="match-time">{{ match.time }}</div>
+        </div>
+
+        <div class="teams-container">
+          <div class="team home-team">
+            <div class="team-shield">
+              <img [src]="match.homeTeam.shield" [alt]="match.homeTeam.name + ' shield'" class="shield-image">
+            </div>
+            <span class="team-name">{{ match.homeTeam.name }}</span>
+          </div>
+          
+          <div class="vs-indicator">
+            <span>VS</span>
+          </div>
+          
+          <div class="team away-team">
+            <div class="team-shield">
+              <img [src]="match.awayTeam.shield" [alt]="match.awayTeam.name + ' shield'" class="shield-image">
+            </div>
+            <span class="team-name">{{ match.awayTeam.name }}</span>
+          </div>
+        </div>
+
+        <div class="match-details">
+          <div class="venue">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{ match.venue }}</span>
+          </div>
+          <div class="price">
+            <span class="price-from">Desde</span>
+            <span class="price-amount">${{ match.price }}</span>
+          </div>
+        </div>
+
+        <div class="availability">
+          <span class="available-seats">{{ match.availableSeats }} asientos disponibles</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seat Selection Step -->
+  <div class="step-content" *ngIf="currentStep === ReservationStep.SEAT_SELECTION">
+    <div class="step-header">
+      <button class="back-button" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="selected-match-info">
+        <h2 class="step-title" *ngIf="selectedMatch">{{ selectedMatch.homeTeam.name }} vs {{ selectedMatch.awayTeam.name }}</h2>
+        <p class="step-subtitle" *ngIf="selectedMatch">{{ formatDate(selectedMatch.date) }} - {{ selectedMatch.time }} | {{ selectedMatch.venue }}</p>
+      </div>
+    </div>
+
+    <div class="seat-selection-container">
+      <div class="stadium-view">
+        <div class="field-indicator">
+          <span>CAMPO</span>
+        </div>
+        
+        <div class="seating-sections">
+          <div class="section" *ngFor="let section of ['A', 'B', 'C', 'D']">
+            <div class="section-header">
+              <span class="section-name">{{ getSectionName(section) }}</span>
+            </div>
+            <div class="seats-grid">
+              <div class="seat" 
+                   *ngFor="let seat of availableSeats | seatFilter:section"
+                   [class.occupied]="seat.isOccupied"
+                   [class.selected]="seat.isSelected"
+                   [class.available]="!seat.isOccupied && !seat.isSelected"
+                   (click)="onSeatClick(seat)">
+                <span class="seat-number">{{ seat.number }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selection-sidebar">
+        <div class="legend">
+          <h3>Leyenda</h3>
+          <div class="legend-item">
+            <div class="legend-seat available"></div>
+            <span>Disponible</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-seat selected"></div>
+            <span>Seleccionado</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-seat occupied"></div>
+            <span>Ocupado</span>
+          </div>
+        </div>
+
+        <div class="selected-seats-summary" *ngIf="selectedSeats.length > 0">
+          <h3>Asientos seleccionados</h3>
+          <div class="selected-seat-item" *ngFor="let seat of selectedSeats">
+            <div class="seat-info">
+              <span class="seat-section">{{ getSectionName(seat.section) }}</span>
+              <span class="seat-position">Fila {{ seat.row }}, Asiento {{ seat.number }}</span>
+            </div>
+            <span class="seat-price">${{ seat.price }}</span>
+          </div>
+          
+          <div class="total-price">
+            <span class="total-label">Total:</span>
+            <span class="total-amount">${{ totalPrice }}</span>
+          </div>
+          
+          <button class="continue-button" (click)="goToSummary()">
+            Continuar
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="no-selection" *ngIf="selectedSeats.length === 0">
+          <i class="fas fa-mouse-pointer"></i>
+          <p>Selecciona tus asientos en el mapa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Step -->
+  <div class="step-content" *ngIf="currentStep === ReservationStep.SUMMARY">
+    <div class="step-header">
+      <button class="back-button" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h2 class="step-title">Resumen de tu reserva</h2>
+    </div>
+
+    <div class="summary-container match-summary">
+      <div class="summary-section ">
+        <h3>Detalles del partido</h3>
+        <div class="match-info">
+          <div class="teams">
+            <span class="team-names">{{ selectedMatch?.homeTeam?.name }} vs {{ selectedMatch?.awayTeam?.name }}</span>
+          </div>
+          <div class="match-meta">
+            <div class="meta-item" *ngIf="selectedMatch">
+              <i class="fas fa-calendar"></i>
+              <span>{{ formatDate(selectedMatch.date) }}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-clock"></i>
+              <span>{{ selectedMatch?.time }}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ selectedMatch?.venue }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-section seats-summary">
+        <h3>Asientos seleccionados</h3>
+        <div class="seats-list">
+          <div class="seat-item" *ngFor="let seat of selectedSeats">
+            <div class="seat-details">
+              <span class="section">{{ getSectionName(seat.section) }}</span>
+              <span class="position">Fila {{ seat.row }}, Asiento {{ seat.number }}</span>
+            </div>
+            <span class="price">${{ seat.price }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-section price-breakdown">
+       <div class="resumen">
+        <h3>Desglose de precios</h3>
+        <div class="price-item" *ngFor="let seat of selectedSeats">
+          <span class="description">{{ getSectionName(seat.section) }} - Fila {{ seat.row }}, Asiento {{ seat.number }}</span>
+          <span class="amount">${{ seat.price }}</span>
+        </div>
+        <div class="price-total">
+          <span class="total-label">Total a pagar:</span>
+          <span class="total-amount">${{ totalPrice }}</span>
+        </div>
+       </div>
+        <button class="pay-button" (click)="goToPayment()">
+            Proceder al pago
+            <i class="fas fa-credit-card"></i>
+          </button>
+      </div>
+
+      <!-- <div class="summary-actions">
+       
+      </div> -->
+    </div>
+  </div>
+
+  <!-- Payment Step -->
+  <div class="step-content payment-step" *ngIf="currentStep === ReservationStep.PAYMENT">
+    <div class="step-header">
+      <button class="back-button" (click)="goBack()" [disabled]="processingPayment">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h2 class="step-title">Realizar pago</h2>
+    </div>
+
+    <div class="payment-container">
+      <div class="payment-summary">
+        <h3>Resumen del pedido</h3>
+        <div class="order-details">
+          <p class="match-title">{{ selectedMatch?.homeTeam?.name }} vs {{ selectedMatch?.awayTeam?.name }}</p>
+          <p class="seat-count">{{ selectedSeats.length }} asiento(s) seleccionado(s)</p>
+          <div class="final-total">
+            <span class="label">Total:</span>
+            <span class="amount">${{ totalPrice }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-form">
+        <div class="form-section">
+          <h4>Información de pago</h4>
+          <div class="form-group">
+            <label>Número de tarjeta</label>
+            <input type="text" placeholder="1234 5678 9012 3456" [disabled]="processingPayment">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Vencimiento</label>
+              <input type="text" placeholder="MM/AA" [disabled]="processingPayment">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" placeholder="123" [disabled]="processingPayment">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nombre del titular</label>
+            <input type="text" placeholder="Nombre completo" [disabled]="processingPayment">
+          </div>
+        </div>
+
+        <button class="process-payment-button" 
+                (click)="processPayment()" 
+                [disabled]="processingPayment">
+          <div class="button-content" *ngIf="!processingPayment">
+            <i class="fas fa-lock"></i>
+            <span>Pagar ${{ totalPrice }}</span>
+          </div>
+          <div class="button-content" *ngIf="processingPayment">
+            <div class="payment-spinner"></div>
+            <span>Procesando pago...</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Step -->
+  <div class="step-content" *ngIf="currentStep === ReservationStep.CONFIRMATION">
+    <div class="confirmation-container">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      
+      <h2 class="confirmation-title">¡Reserva confirmada!</h2>
+      <p class="confirmation-subtitle">Tu pago ha sido procesado exitosamente</p>
+
+      <div class="confirmation-details">
+        <div class="confirmation-section">
+          <h3>Detalles de tu reserva</h3>
+          <div class="detail-item">
+            <span class="label">Partido:</span>
+            <span class="value">{{ selectedMatch?.homeTeam?.name }} vs {{ selectedMatch?.awayTeam?.name }}</span>
+          </div>
+          <div class="detail-item" *ngIf="selectedMatch">
+            <span class="label">Fecha:</span>
+            <span class="value">{{ formatDate(selectedMatch.date) }} - {{ selectedMatch.time }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Lugar:</span>
+            <span class="value">{{ selectedMatch?.venue }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Asientos:</span>
+            <span class="value">{{ selectedSeats.length }} asiento(s)</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Total pagado:</span>
+            <span class="value">${{ totalPrice }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirmation-actions">
+        <button class="new-reservation-button" (click)="startNewReservation()">
+          <i class="fas fa-plus"></i>
+          Nueva reserva
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

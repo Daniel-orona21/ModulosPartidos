@@ -1,1 +1,343 @@
-<p>resultados works!</p>
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Dashboard de Resultados</h1>
+    <p class="dashboard-subtitle">Análisis y métricas del fútbol en tiempo real</p>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Cargando métricas...</p>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content" *ngIf="!loading">
+    
+    <!-- Metrics Cards Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card" *ngFor="let metric of dashboardMetrics" [attr.data-metric]="metric.id">
+        <div class="metric-header">
+          <div class="metric-icon">
+            <span class="material-symbols-outlined">{{ metric.icon }}</span>
+          </div>
+          <div class="metric-period">{{ metric.period }}</div>
+        </div>
+        
+        <div class="metric-content">
+          <h3 class="metric-title">{{ metric.title }}</h3>
+          <div class="metric-value">{{ metric.value }}</div>
+          <div class="metric-change" [class]="getChangeClass(metric.changeType)">
+            <span class="material-symbols-outlined change-icon">{{ getChangeIcon(metric.changeType) }}</span>
+            <span class="change-value">{{ metric.change }}%</span>
+            <span class="change-subtitle">{{ metric.subtitle }}</span>
+          </div>
+        </div>
+
+        <!-- Mini Chart -->
+        <div class="metric-chart">
+          <svg viewBox="0 0 200 40" class="chart-svg">
+            <polyline
+              [attr.points]="getChartPoints(metric.chartData)"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="chart-line">
+            </polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Sections Grid -->
+    <div class="secondary-grid">
+      
+      <!-- Recent Matches Section -->
+      <div class="section-card recent-matches">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="material-symbols-outlined">sports_soccer</span>
+            Partidos Recientes
+          </h2>
+          <button class="view-all-btn">Ver todos</button>
+        </div>
+        
+        <div class="matches-list">
+          <div class="match-item" *ngFor="let match of recentMatches" [class]="getStatusClass(match.status)">
+            <div class="match-status">
+              <span class="status-indicator"></span>
+              <span class="status-text">{{ getStatusText(match.status) }}</span>
+            </div>
+            
+            <div class="match-info">
+              <div class="teams">
+                <div class="team home-team">
+                  <div class="team-info">
+                    <div class="team-logo">
+                      <img [src]="getTeamLogo(match.homeTeam)" [alt]="match.homeTeam" />
+                    </div>
+                    <span class="team-name">{{ match.homeTeam }}</span>
+                  </div>
+                  <span class="team-score" *ngIf="match.status !== 'upcoming'">{{ match.homeScore }}</span>
+                </div>
+                
+                <div class="vs-divider">
+                  <span *ngIf="match.status === 'upcoming'">VS</span>
+                  <span *ngIf="match.status !== 'upcoming'">-</span>
+                </div>
+                
+                <div class="team away-team">
+                  <span class="team-score" *ngIf="match.status !== 'upcoming'">{{ match.awayScore }}</span>
+                  <div class="team-info">
+                    <div class="team-logo">
+                      <img [src]="getTeamLogo(match.awayTeam)" [alt]="match.awayTeam" />
+                    </div>
+                    <span class="team-name">{{ match.awayTeam }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="match-meta">
+                <span class="match-league">{{ match.league }}</span>
+                <span class="match-date">{{ formatDate(match.date) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Scorers Section -->
+      <div class="section-card top-scorers">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="material-symbols-outlined">sports_soccer</span>
+            Máximos Goleadores
+          </h2>
+          <button class="view-all-btn">Ver ranking</button>
+        </div>
+        
+        <div class="scorers-list">
+          <div class="scorer-item" *ngFor="let scorer of topScorers; let i = index">
+            <div class="scorer-rank">{{ i + 1 }}</div>
+            
+            <div class="scorer-info">
+              <div class="scorer-name">{{ scorer.name }}</div>
+              <div class="scorer-team-info">
+                <div class="team-logo">
+                  <img [src]="getTeamLogo(scorer.team)" [alt]="scorer.team" />
+                </div>
+                <span class="scorer-team">{{ scorer.team }}</span>
+              </div>
+            </div>
+            
+            <div class="scorer-stats">
+              <div class="goals-count">
+                <span class="goals-number">{{ scorer.goals }}</span>
+                <span class="goals-label">goles</span>
+              </div>
+              <div class="average">{{ scorer.average }} por partido</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Section -->
+      <div class="section-card quick-stats">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="material-symbols-outlined">analytics</span>
+            Estadísticas Rápidas
+          </h2>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">156</div>
+            <div class="stat-label">Equipos Registrados</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value">89%</div>
+            <div class="stat-label">Partidos Completados</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value">3.2</div>
+            <div class="stat-label">Goles por Partido</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-value">24</div>
+            <div class="stat-label">Ligas Activas</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="material-symbols-outlined">analytics</span>
+          Análisis de Datos
+        </h2>
+      </div>
+
+      <div class="charts-grid">
+        
+        <!-- Goals Trend Chart -->
+        <div class="chart-card large-chart">
+          <div class="chart-header">
+            <h3 class="chart-title">Evolución de Goles por Mes</h3>
+            <div class="chart-value">
+              <span class="current-value">{{ (goalsPerMonthData.datasets[0]?.data && goalsPerMonthData.datasets[0].data.length > 0) ? goalsPerMonthData.datasets[0].data[goalsPerMonthData.datasets[0].data.length - 1] : 0 }}</span>
+              <span class="value-label">goles este mes</span>
+            </div>
+          </div>
+          
+          <div class="chart-container">
+            <svg viewBox="0 0 400 200" class="line-chart">
+              <!-- Grid lines -->
+              <defs>
+                <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#2a2a2a" stroke-width="1" opacity="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              
+              <!-- Area fill -->
+              <path
+                [attr.d]="getLineChartArea(goalsPerMonthData.datasets[0]?.data || [])"
+                fill="url(#gradient)"
+                opacity="0.3">
+              </path>
+              
+              <!-- Line -->
+              <path
+                [attr.d]="getLineChartPath(goalsPerMonthData.datasets[0]?.data || [])"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+              </path>
+              
+              <!-- Data points -->
+              <g *ngFor="let value of goalsPerMonthData.datasets[0]?.data || []; let i = index">
+                <circle
+                  [attr.cx]="40 + (i * 320) / ((goalsPerMonthData.datasets[0]?.data?.length || 1) - 1)"
+                  [attr.cy]="160 - ((value - 245) / (456 - 245)) * 120"
+                  r="4"
+                  fill="#ffffff"
+                  stroke="#0a0a0a"
+                  stroke-width="2">
+                </circle>
+              </g>
+              
+              <!-- Gradient definition -->
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.5" />
+                  <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            <!-- X-axis labels -->
+            <div class="chart-labels">
+              <span *ngFor="let label of goalsPerMonthData.labels" class="label">{{ label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- League Attendance Bar Chart -->
+        <div class="chart-card chart-bar">
+          <div class="chart-header">
+            <h3 class="chart-title">Asistencia por Liga</h3>
+            <div class="chart-subtitle">Promedio de asistentes</div>
+          </div>
+          
+          <div class="chart-container">
+            <div class="bar-chart">
+              <div class="bar-item" *ngFor="let item of leagueAttendanceData">
+                <div class="bar-container">
+                  <div class="bar-fill" 
+                       [style.height.px]="getBarHeight(item.value, getMaxValue(leagueAttendanceData))">
+                    <div class="bar-value">{{ (item.value / 1000).toFixed(0) }}k</div>
+                  </div>
+                </div>
+                <div class="bar-label">{{ item.label }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Donut Chart -->
+        <div class="chart-card chart-donut">
+          <div class="chart-header">
+            <h3 class="chart-title">Rendimiento General</h3>
+            <div class="chart-subtitle">Distribución de resultados</div>
+          </div>
+          
+          <div class="chart-container">
+            <div class="donut-chart-container">
+              <svg viewBox="0 0 160 160" class="donut-chart">
+                <g *ngFor="let item of performanceData; let i = index">
+                  <path
+                    [attr.d]="getDonutPath(performanceData, i)"
+                    [class]="'donut-segment segment-' + i"
+                    [attr.data-label]="item.label">
+                  </path>
+                </g>
+                
+                <!-- Center text -->
+                <text x="80" y="75" text-anchor="middle" class="donut-center-text">
+                  <tspan class="center-value">{{ getTotalValue(performanceData) }}</tspan>
+                </text>
+                <text x="80" y="90" text-anchor="middle" class="donut-center-label">
+                  <tspan>Partidos</tspan>
+                </text>
+              </svg>
+              
+              <!-- Legend -->
+              <div class="donut-legend">
+                <div class="legend-item" *ngFor="let item of performanceData; let i = index">
+                  <div class="legend-color" [class]="'color-' + i"></div>
+                  <div class="legend-text">
+                    <span class="legend-label">{{ item.label }}</span>
+                    <span class="legend-value">{{ getDonutPercentage(item.value, getTotalValue(performanceData)) }}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue Bar Chart -->
+        <div class="chart-card chart-horizontal">
+          <div class="chart-header">
+            <h3 class="chart-title">Ingresos Mensuales</h3>
+            <div class="chart-subtitle">Millones de dólares</div>
+          </div>
+          
+          <div class="chart-container">
+            <div class="bar-chart horizontal">
+              <div class="bar-item" *ngFor="let item of revenueByMonthData">
+                <div class="bar-label-horizontal">{{ item.label }}</div>
+                <div class="bar-container-horizontal">
+                  <div class="bar-fill-horizontal" 
+                       [style.width.%]="(item.value / getMaxValue(revenueByMonthData)) * 100">
+                  </div>
+                  <div class="bar-value-horizontal">${{ item.value }}M</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
