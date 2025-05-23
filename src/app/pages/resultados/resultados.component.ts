@@ -60,7 +60,7 @@ export class ResultadosComponent implements OnInit {
   topScorers: TopScorer[] = [];
   loading = false;
 
-  // Chart data
+  // Datos del gráfico
   goalsPerMonthData: LineChartData = { labels: [], datasets: [] };
   leagueAttendanceData: ChartData[] = [];
   performanceData: ChartData[] = [];
@@ -73,7 +73,7 @@ export class ResultadosComponent implements OnInit {
   private loadDashboardData() {
     this.loading = true;
     
-    // Simulate loading delay
+    // Simular retraso de carga
     setTimeout(() => {
       this.dashboardMetrics = [
         {
@@ -122,7 +122,7 @@ export class ResultadosComponent implements OnInit {
         }
       ];
 
-      // Goals per month chart data
+      // Goles por mes
       this.goalsPerMonthData = {
         labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
         datasets: [{
@@ -131,7 +131,7 @@ export class ResultadosComponent implements OnInit {
         }]
       };
 
-      // League attendance data
+      // Asistencia por liga
       this.leagueAttendanceData = [
         { label: 'La Liga', value: 42000 },
         { label: 'Premier League', value: 38500 },
@@ -140,14 +140,14 @@ export class ResultadosComponent implements OnInit {
         { label: 'Ligue 1', value: 28900 }
       ];
 
-      // Performance data (wins/draws/losses)
+      // Rendimiento (victorias/empates/derrotas)
       this.performanceData = [
         { label: 'Victorias', value: 65 },
         { label: 'Empates', value: 25 },
         { label: 'Derrotas', value: 10 }
       ];
 
-      // Revenue by month
+      // Ingresos por mes
       this.revenueByMonthData = [
         { label: 'Ene', value: 1.8 },
         { label: 'Feb', value: 2.1 },
@@ -157,6 +157,7 @@ export class ResultadosComponent implements OnInit {
         { label: 'Jun', value: 3.2 }
       ];
 
+      // Partidos recientes
       this.recentMatches = [
         {
           id: '1',
@@ -200,6 +201,7 @@ export class ResultadosComponent implements OnInit {
         }
       ];
 
+      // Máximos goleadores
       this.topScorers = [
         {
           id: '1',
@@ -236,9 +238,10 @@ export class ResultadosComponent implements OnInit {
       ];
 
       this.loading = false;
-    }, 1000);
+    }, 0);
   }
 
+  // Formato de fecha
   formatDate(date: Date): string {
     return new Intl.DateTimeFormat('es-ES', {
       day: '2-digit',
@@ -298,9 +301,9 @@ export class ResultadosComponent implements OnInit {
   getLineChartPath(data: number[]): string {
     if (!data || data.length === 0) return '';
     
-    const width = 400;
-    const height = 200;
-    const padding = 40;
+    const width = 800; // Ancho apropiado para mantener proporciones
+    const height = 300; // Alto apropiado para mantener proporciones
+    const padding = 40; // Padding en píxeles
     
     const maxValue = Math.max(...data);
     const minValue = Math.min(...data);
@@ -318,8 +321,8 @@ export class ResultadosComponent implements OnInit {
   getLineChartArea(data: number[]): string {
     if (!data || data.length === 0) return '';
     
-    const width = 400;
-    const height = 200;
+    const width = 800;
+    const height = 300;  
     const padding = 40;
     
     const maxValue = Math.max(...data);
@@ -339,7 +342,26 @@ export class ResultadosComponent implements OnInit {
     return `M${firstX},${bottomY} L${points.join(' L')} L${lastX},${bottomY} Z`;
   }
 
-  // Bar chart methods
+  // Método para obtener las posiciones de los puntos del gráfico de línea
+  getLineChartPoints(data: number[]): {x: number, y: number, value: number}[] {
+    if (!data || data.length === 0) return [];
+    
+    const width = 800;
+    const height = 300;
+    const padding = 40;
+    
+    const maxValue = Math.max(...data);
+    const minValue = Math.min(...data);
+    const range = maxValue - minValue || 1;
+    
+    return data.map((value, index) => ({
+      x: padding + (index * (width - 2 * padding)) / (data.length - 1),
+      y: height - padding - ((value - minValue) / range) * (height - 2 * padding),
+      value: value
+    }));
+  }
+
+  // Métodos para el gráfico de barras
   getBarHeight(value: number, maxValue: number): number {
     return (value / maxValue) * 160; // 160px max height
   }
@@ -348,7 +370,7 @@ export class ResultadosComponent implements OnInit {
     return Math.max(...data.map(d => d.value));
   }
 
-  // Donut chart methods
+  // Métodos para el gráfico de donut
   getDonutPath(data: ChartData[], index: number): string {
     const total = data.reduce((sum, item) => sum + item.value, 0);
     const radius = 70;
@@ -388,7 +410,7 @@ export class ResultadosComponent implements OnInit {
     return data.reduce((sum, item) => sum + item.value, 0);
   }
 
-  // Method to get team logo based on team name
+  // Método para obtener el logo del equipo basado en el nombre del equipo
   getTeamLogo(teamName: string): string {
     const teamLogos: { [key: string]: string } = {
       'Real Madrid': '/madrid.png',
@@ -405,9 +427,9 @@ export class ResultadosComponent implements OnInit {
       'Sevilla': '/sevilla.png',
       'AC Milan': '/milan.png',
       'Juventus': '/juventus.png',
-      'Manchester City': '/manchester.png' // Using the same for both Manchester teams
+      'Manchester City': '/manchester.png' 
     };
 
-    return teamLogos[teamName] || '/favicon.ico'; // Fallback to default icon
+    return teamLogos[teamName] || '/favicon.ico'; 
   }
 }

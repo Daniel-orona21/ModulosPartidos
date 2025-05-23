@@ -670,26 +670,23 @@
     overflow: visible;
   }
   
-  /* Line chart extra small screens */
+  /* Ultra small screens - optimize spacing */
   .line-chart {
-    height: 160px;
-    overflow: visible;
+    height: 140px;
   }
   
   .chart-labels {
-    padding: 0 10px;
+    padding: 0 5%;
     margin-top: 16px;
-    flex-wrap: wrap;
     gap: 2px;
+    justify-content: space-between;
   }
   
   .chart-labels .label {
-    font-size: 0.65rem;
-    transform: none;
-    margin-top: 0;
-    flex: 0 0 auto;
-    min-width: 28px;
+    font-size: 0.6rem;
+    flex: 1;
     text-align: center;
+    min-width: 0;
   }
   
   /* Bar chart extra small screens */
@@ -908,20 +905,23 @@
   width: 100%;
   height: 180px;
   overflow: visible;
+  display: block;
 }
 
 .chart-labels {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
-  padding: 0 20px;
+  padding: 0 5%; /* Padding que coincida aproximadamente con el padding del SVG (40px de 800px = 5%) */
+  align-items: center;
 }
 
 .chart-labels .label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: #666666;
   text-align: center;
   flex: 1;
+  white-space: nowrap;
 }
 
 /* Bar Chart Styles */
@@ -1220,14 +1220,16 @@
   }
   
   .chart-labels {
-    padding: 0 20px;
+    padding: 0 5%;
     margin-top: 12px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
   
   .chart-labels .label {
     font-size: 0.7rem;
-    transform: rotate(-45deg);
-    margin-top: 8px;
+    flex: 1;
+    min-width: 0;
   }
   
   /* Bar chart mobile adjustments */
@@ -1355,26 +1357,23 @@
     overflow: visible;
   }
   
-  /* Line chart extra small screens */
+  /* Ultra small screens - optimize spacing */
   .line-chart {
-    height: 160px;
-    overflow: visible;
+    height: 140px;
   }
   
   .chart-labels {
-    padding: 0 10px;
+    padding: 0 5%;
     margin-top: 16px;
-    flex-wrap: wrap;
     gap: 2px;
+    justify-content: space-between;
   }
   
   .chart-labels .label {
-    font-size: 0.65rem;
-    transform: none;
-    margin-top: 0;
-    flex: 0 0 auto;
-    min-width: 28px;
+    font-size: 0.6rem;
+    flex: 1;
     text-align: center;
+    min-width: 0;
   }
   
   /* Bar chart extra small screens */
