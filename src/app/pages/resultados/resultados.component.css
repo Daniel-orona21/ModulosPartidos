@@ -1660,3 +1660,443 @@
 .team.away-team .team-info {
   flex-direction: row-reverse;
 }
+
+/* Estilos específicos para dispositivos wearables 250x250 */
+@media screen and (max-width: 250px) and (max-height: 250px) {
+  .dashboard-container {
+    padding: 8px;
+    max-width: 100%;
+    min-height: 100vh;
+    font-size: 10px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .dashboard-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .dashboard-subtitle {
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .dashboard-content {
+    gap: 16px;
+  }
+
+  /* Métricas en cuadrícula compacta */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .metric-card {
+    padding: 12px;
+    border-radius: 8px;
+    min-height: 80px;
+  }
+
+  .metric-header {
+    margin-bottom: 8px;
+  }
+
+  .metric-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .metric-period {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+  }
+
+  .metric-title {
+    font-size: 0.6rem;
+    margin: 0 0 4px 0;
+  }
+
+  .metric-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .metric-change {
+    font-size: 0.6rem;
+    gap: 3px;
+  }
+
+  .change-icon {
+    font-size: 10px;
+  }
+
+  .metric-chart {
+    width: 60px;
+    height: 20px;
+    opacity: 0.2;
+  }
+
+  /* Grid secundario simplificado */
+  .secondary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .section-card {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .section-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    gap: 4px;
+  }
+
+  .section-title .material-symbols-outlined {
+    font-size: 12px;
+  }
+
+  .view-all-btn {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    display: none; /* Ocultar en wearables por espacio */
+  }
+
+  /* Partidos recientes compactos */
+  .matches-list {
+    gap: 8px;
+  }
+
+  .match-item {
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .match-status {
+    margin-bottom: 6px;
+    gap: 4px;
+  }
+
+  .status-indicator {
+    width: 4px;
+    height: 4px;
+  }
+
+  .status-text {
+    font-size: 0.6rem;
+  }
+
+  .teams {
+    margin-bottom: 6px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .team {
+    gap: 4px;
+  }
+
+  .team.away-team {
+    flex-direction: row;
+  }
+
+  .team-name {
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+
+  .team-score {
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 16px;
+  }
+
+  .vs-divider {
+    font-size: 0.5rem;
+    margin: 0 8px;
+  }
+
+  .match-meta {
+    font-size: 0.5rem;
+    gap: 4px;
+  }
+
+  .team-logo {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Goleadores compactos */
+  .scorers-list {
+    gap: 6px;
+  }
+
+  .scorer-item {
+    gap: 8px;
+    padding: 6px;
+    border-radius: 4px;
+  }
+
+  .scorer-rank {
+    width: 20px;
+    height: 20px;
+    font-size: 0.6rem;
+  }
+
+  .scorer-name {
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+
+  .scorer-team {
+    font-size: 0.5rem;
+  }
+
+  .scorer-team-info .team-logo {
+    width: 10px;
+    height: 10px;
+  }
+
+  .goals-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .goals-label {
+    font-size: 0.5rem;
+  }
+
+  .average {
+    font-size: 0.5rem;
+  }
+
+  /* Gráficos simplificados para wearables */
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .chart-card {
+    padding: 8px;
+    border-radius: 8px;
+    height: auto;
+    min-height: 120px;
+  }
+
+  .chart-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .chart-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .chart-subtitle {
+    font-size: 0.5rem;
+    margin-top: 2px;
+  }
+
+  .current-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .value-label {
+    font-size: 0.5rem;
+  }
+
+  .chart-container {
+    padding: 8px 0;
+    height: auto;
+    min-height: 60px;
+  }
+
+  /* Line chart para wearables */
+  .line-chart {
+    height: 60px;
+  }
+
+  .chart-labels {
+    margin-top: 6px;
+    padding: 0 2%;
+  }
+
+  .chart-labels .label {
+    font-size: 0.4rem;
+  }
+
+  /* Bar chart para wearables */
+  .bar-chart {
+    min-height: 60px;
+    gap: 2px;
+    padding: 8px 1px 0;
+  }
+
+  .bar-container {
+    height: 50px;
+    margin-bottom: 4px;
+  }
+
+  .bar-fill {
+    width: 90%;
+    min-height: 15px;
+    padding-top: 3px;
+  }
+
+  .bar-label {
+    font-size: 0.45rem;
+    line-height: 0.8;
+    max-height: 1.6em;
+  }
+
+  .bar-value {
+    font-size: 0.45rem;
+    font-weight: 600;
+  }
+
+  /* Donut chart para wearables */
+  .donut-chart-container {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0;
+    align-items: center;
+  }
+
+  .donut-chart {
+    width: 80px;
+    height: 80px;
+  }
+
+  .donut-center-text .center-value {
+    font-size: 10px;
+  }
+
+  .donut-center-label {
+    font-size: 6px;
+  }
+
+  .donut-legend {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .donut-legend .legend-item {
+    padding: 6px 8px;
+    gap: 6px;
+    margin-bottom: 3px;
+    min-height: 28px;
+  }
+
+  .legend-color {
+    width: 8px;
+    height: 8px;
+  }
+
+  .legend-label {
+    font-size: 0.5rem;
+    font-weight: 500;
+  }
+
+  .legend-value {
+    font-size: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Horizontal bar chart para wearables */
+  .bar-chart.horizontal {
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .bar-chart.horizontal .bar-item {
+    gap: 4px;
+    min-height: 20px;
+  }
+
+  .bar-label-horizontal {
+    min-width: 20px;
+    font-size: 0.5rem;
+    font-weight: 500;
+  }
+
+  .bar-container-horizontal {
+    height: 16px;
+    border-radius: 8px;
+  }
+
+  .bar-fill-horizontal {
+    border-radius: 8px;
+    min-width: 15px;
+  }
+
+  .bar-value-horizontal {
+    font-size: 0.45rem;
+    font-weight: 600;
+    right: 4px;
+  }
+
+  /* Loading para wearables */
+  .loading-container {
+    padding: 40px 10px;
+  }
+
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+    margin: 0 auto 10px;
+  }
+
+  /* Ocultar elementos menos importantes en wearables */
+  .charts-section {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  /* Mostrar solo las métricas más importantes */
+  .metric-card:nth-child(n+3) {
+    display: none;
+  }
+
+  /* Mostrar solo los primeros 2 partidos */
+  .match-item:nth-child(n+3) {
+    display: none;
+  }
+
+  /* Mostrar solo los primeros 3 goleadores */
+  .scorer-item:nth-child(n+4) {
+    display: none;
+  }
+
+  /* Optimizar texto para legibilidad en pantallas pequeñas */
+  * {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
