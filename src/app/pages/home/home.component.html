@@ -1,0 +1,39 @@
+<div class="contenedor">
+    <nav>
+        <span class="material-symbols-outlined balon">
+            sports_soccer
+            </span>
+        <ul>
+            <li [routerLink]="['/home/horarios']" routerLinkActive="active">
+                <div class="nav-item">
+                    <span class="material-symbols-outlined">schedule</span>
+                </div>
+            </li>
+            <li [routerLink]="['/home/lugares']" routerLinkActive="active">
+                <div class="nav-item">
+                    <span class="material-symbols-outlined">chair</span>
+                </div>
+            </li>
+            <li [routerLink]="['/home/info']" routerLinkActive="active">
+                <div class="nav-item">
+                    <span class="material-symbols-outlined">widgets</span>
+                </div>
+            </li>
+            <li [routerLink]="['/home/resultados']" routerLinkActive="active">
+                <div class="nav-item">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+            </li>
+            <li [routerLink]="['/home/ajustes']" routerLinkActive="active">
+                <div class="nav-item">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="contenido">
+        <div class="animationState" [@fadeAnimation]="animationState">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

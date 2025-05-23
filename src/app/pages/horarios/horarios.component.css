@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: 'Saira', sans-serif;
+}
+
+.horarios-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contentT {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.contentT span, .contentT h1 {
+  margin: 0;
+  display: flex;
+}
+
+.title-section {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-section .material-symbols-outlined {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.title-section h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.filter-btn.active {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+/* Calendar navigation */
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.current-period {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.nav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav-btn .material-symbols-outlined {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile Day Selector (hidden by default on desktop) */
+.mobile-day-selector {
+  display: none;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Para Firefox */
+}
+
+.mobile-day-selector::-webkit-scrollbar {
+  display: none; /* Para Chrome y Safari */
+}
+
+.mobile-day-btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-right: 10px;
+  min-width: 60px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-day-btn .day-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+}
+
+.mobile-day-btn .day-number {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mobile-day-btn.active {
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Matches (hidden by default on desktop) */
+.mobile-matches {
+  display: none;
+}
+
+.mobile-day-matches {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-day-matches.active {
+  display: flex;
+}
+
+.mobile-matches .match-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mobile-matches .match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-matches .match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.mobile-matches .match-league {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mobile-matches .match-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mobile-matches .match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.mobile-matches .team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 40%;
+}
+
+.mobile-matches .team img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.mobile-matches .team span {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.mobile-matches .match-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.mobile-matches .match-score.live {
+  color: #ffffff;
+  position: relative;
+}
+
+.mobile-matches .match-score.live::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  bottom: -8px;
+  animation: pulse 1.5s infinite;
+}
+
+.mobile-matches .match-score.upcoming {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mobile-matches .match-venue {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* Schedule container */
+.schedule-container {
+  width: 100%;
+  overflow-x: auto; /* Solo permitimos scroll horizontal si es absolutamente necesario */
+  margin-bottom: 30px;
+}
+
+/* Schedule grid */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  min-width: 800px; /* Establecemos un mínimo para asegurar visibilidad en móviles */
+}
+
+.day-column {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.day-column.today {
+  background-color: rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); */
+}
+
+.day-header {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.day-number {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.matches {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.matches::-webkit-scrollbar {
+  width: 4px;
+}
+
+.matches::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.matches::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.match-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 12px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.league-badge {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background-color: transparent;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.league-badge img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.match-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.match-teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 40%;
+}
+
+.team img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.team span {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.match-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.match-score.live {
+  color: #ffffff;
+  position: relative;
+}
+
+.match-score.live::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  bottom: -8px;
+  animation: pulse 1.5s infinite;
+}
+
+.match-score.upcoming {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.match-venue {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* Upcoming highlights */
+.upcoming-highlights {
+  margin-top: 20px;
+}
+
+.upcoming-highlights h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upcoming-highlights h2::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.highlight-card {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.highlight-card.featured {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.highlight-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 50px;
+}
+
+.date-day {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.date-month {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.highlight-content {
+  flex: 1;
+}
+
+.highlight-league {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.highlight-teams {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.highlight-teams span:nth-child(2) {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.highlight-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Media queries para la responsividad */
+@media (max-width: 1200px) {
+  .highlights-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filters {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Estilos para tablets */
+@media (max-width: 768px) {
+  .horarios-container {
+    padding: 15px;
+  }
+  
+  .header {
+    margin-bottom: 15px;
+  }
+  
+  .title-section h1 {
+    font-size: 24px;
+  }
+  
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+  /* Ocultar vista de escritorio */
+  .schedule-container {
+    display: none;
+  }
+  
+  /* Mostrar vista móvil */
+  .mobile-day-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .mobile-matches {
+    display: block;
+  }
+  
+  .title-section .material-symbols-outlined {
+    font-size: 24px;
+  }
+  
+  .title-section h1 {
+    font-size: 20px;
+  }
+  
+  .calendar-nav {
+    margin-bottom: 15px;
+  }
+  
+  .current-period {
+    font-size: 16px;
+  }
+  
+  .filter-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  
+  .upcoming-highlights h2 {
+    font-size: 18px;
+  }
+  
+  .highlight-card {
+    padding: 12px;
+  }
+}
+
+/* Estilos para móviles pequeños */
+@media (max-width: 576px) {
+  .horarios-container {
+    padding: 10px;
+  }
+  
+  .filters {
+    gap: 5px;
+  }
+  
+  .filter-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  .mobile-day-btn {
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+  
+  .mobile-day-btn .day-number {
+    font-size: 16px;
+  }
+  
+  .mobile-matches .team img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .mobile-matches .team span {
+    font-size: 12px;
+  }
+  
+  .mobile-matches .match-score {
+    font-size: 18px;
+  }
+  
+  .highlight-card {
+    padding: 10px;
+  }
+  
+  .date-day {
+    font-size: 16px;
+  }
+  
+  .highlight-teams {
+    font-size: 12px;
+  }
+}
+
+/* Estilos para el botón de hamburguesa y el menú móvil */
+.hamburger-btn {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+
+.hamburger-btn .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  background-color: rgb(21, 21, 21);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu.active .mobile-menu-content {
+  transform: translateX(0);
+}
+
+.mobile-filter-btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-filter-btn.active {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mobile-filter-btn:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+/* Media queries para la responsividad */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-menu {
+    display: block;
+  }
+}
