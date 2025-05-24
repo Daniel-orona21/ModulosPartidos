@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Simular tiempo de carga para iconos y otros elementos
     setTimeout(() => {
       this.startFadeOutTransition();
-    }, 2000); // 2 segundos de loader
+    }, 1000); // 2 segundos de loader
   }
 
   ngOnDestroy() {
