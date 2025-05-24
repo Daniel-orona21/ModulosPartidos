@@ -118,6 +118,11 @@ li.active {
     background-color: #777;
 }
 
+/* Ocultar tooltips por defecto en todos los dispositivos */
+.tooltip {
+  display: none !important;
+}
+
 /* Responsive styles for mobile devices */
 @media screen and (max-width: 968px) {
     .contenedor {
@@ -160,6 +165,11 @@ li.active {
     .contenido {
         max-height: calc(100vh - 80px);
     }
+    
+    /* Asegurar que tooltips estén ocultos en móviles */
+    .tooltip {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -183,6 +193,11 @@ li.active {
         margin: 0;
         padding: 0;
     }
+    
+    /* Asegurar que tooltips estén ocultos en móviles */
+    .tooltip {
+        display: none !important;
+    }
 }
 
 @media (min-width: 1025px) {
@@ -196,6 +211,49 @@ li.active {
     
     .secundario {
       width: 20%;
+    }
+    
+    /* Tooltip styles SOLO para laptops y escritorio */
+    .nav-tooltip {
+      position: relative;
+    }
+    
+    .tooltip {
+      display: block !important; /* Solo mostrar en laptops+ */
+      position: absolute;
+      left: 120%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .tooltip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -6px;
+      transform: translateY(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid rgba(0, 0, 0, 0.9);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+    
+    .nav-tooltip:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      left: 115%;
     }
   }
 

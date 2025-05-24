@@ -164,8 +164,11 @@
   margin: 0;
   color: white;
   font-size: 30px;
-  font-weight: 800;
   margin-top: -25px;
+  font-family: "Saira", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 100;
   transform: translateY(38px) scale(1.2);
 }
 

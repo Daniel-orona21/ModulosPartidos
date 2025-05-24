@@ -8,30 +8,35 @@
             sports_soccer
             </span>
         <ul>
-            <li [routerLink]="['/home/horarios']" routerLinkActive="active">
+            <li [routerLink]="['/home/horarios']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
                     <span class="material-symbols-outlined">schedule</span>
                 </div>
+                <div class="tooltip">Horarios</div>
             </li>
-            <li [routerLink]="['/home/lugares']" routerLinkActive="active">
+            <li [routerLink]="['/home/lugares']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
                     <span class="material-symbols-outlined">chair</span>
                 </div>
+                <div class="tooltip">Reservar lugares</div>
             </li>
-            <li [routerLink]="['/home/info']" routerLinkActive="active">
+            <li [routerLink]="['/home/info']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
                     <span class="material-symbols-outlined">widgets</span>
                 </div>
+                <div class="tooltip">Información</div>
             </li>
-            <li [routerLink]="['/home/resultados']" routerLinkActive="active">
+            <li [routerLink]="['/home/resultados']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
                     <span class="material-symbols-outlined">trending_up</span>
                 </div>
+                <div class="tooltip">Resultados</div>
             </li>
-            <li [routerLink]="['/home/ajustes']" routerLinkActive="active">
+            <li [routerLink]="['/home/ajustes']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
                     <span class="material-symbols-outlined">logout</span>
                 </div>
+                <div class="tooltip">Ajustes</div>
             </li>
         </ul>
     </nav>
