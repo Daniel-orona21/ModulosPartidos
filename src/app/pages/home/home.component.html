@@ -1,8 +1,25 @@
+<!-- Loader centrado -->
+<div class="loader-container" 
+     *ngIf="isLoading" 
+     [class.fade-out]="isLoaderFadingOut">
+  <div class="loader">
+    <div class="square" id="sq1"></div>
+    <div class="square" id="sq2"></div>
+    <div class="square" id="sq3"></div>
+    <div class="square" id="sq4"></div>
+    <div class="square" id="sq5"></div>
+    <div class="square" id="sq6"></div>
+    <div class="square" id="sq7"></div>
+    <div class="square" id="sq8"></div>
+    <div class="square" id="sq9"></div>
+  </div>
+</div>
+
 <!-- Modo TV Dashboard -->
-<app-tv-dashboard *ngIf="isTVMode"></app-tv-dashboard>
+<app-tv-dashboard *ngIf="isTVMode && !isLoading"></app-tv-dashboard>
 
 <!-- Interfaz normal para dispositivos regulares -->
-<div class="contenedor" *ngIf="!isTVMode">
+<div class="contenedor" *ngIf="!isTVMode && !isLoading">
     <nav>
         <span class="material-symbols-outlined balon">
             sports_soccer
@@ -12,7 +29,7 @@
                 <div class="nav-item">
                     <span class="material-symbols-outlined">schedule</span>
                 </div>
-                <div class="tooltip">Horarios</div>
+                <div class="tooltip">Horarios de partidos</div>
             </li>
             <li [routerLink]="['/home/lugares']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
@@ -24,7 +41,7 @@
                 <div class="nav-item">
                     <span class="material-symbols-outlined">widgets</span>
                 </div>
-                <div class="tooltip">Información</div>
+                <div class="tooltip">General</div>
             </li>
             <li [routerLink]="['/home/resultados']" routerLinkActive="active" class="nav-tooltip">
                 <div class="nav-item">
@@ -36,7 +53,7 @@
                 <div class="nav-item">
                     <span class="material-symbols-outlined">logout</span>
                 </div>
-                <div class="tooltip">Ajustes</div>
+                <div class="tooltip">Salir</div>
             </li>
         </ul>
     </nav>

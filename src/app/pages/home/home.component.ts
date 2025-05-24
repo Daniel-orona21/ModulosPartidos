@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   animationState = 0;
   isTVMode = false;
   resizeTimeout: any;
+  isLoading = true;
+  isLoaderFadingOut = false;
 
   constructor(public router: Router) {}
 
@@ -36,6 +38,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     this.checkTVMode();
+    
+    // Simular tiempo de carga para iconos y otros elementos
+    setTimeout(() => {
+      this.startFadeOutTransition();
+    }, 2000); // 2 segundos de loader
   }
 
   ngOnDestroy() {
@@ -61,5 +68,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isTVMode = screenWidth >= 2400;
     
     console.log(`Screen: ${screenWidth}x${screenHeight}, TV Mode: ${this.isTVMode}`);
+  }
+
+  private startFadeOutTransition() {
+    // Iniciar la transición de fade-out del loader
+    this.isLoaderFadingOut = true;
+    
+    // Después de que termine la animación de fade-out, ocultar completamente el loader
+    setTimeout(() => {
+      this.isLoading = false;
+      this.isLoaderFadingOut = false;
+    }, 800); // 800ms coincide con la duración de la transición CSS
   }
 }
